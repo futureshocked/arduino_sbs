@@ -76,15 +76,14 @@ char           return_message[30];
     delay(1);
     // close the connection:
     client.stop();
-    Serial.println("client disonnected");
+    Serial.println("client disconnected");
   }
 }
 
-void construct_page(EthernetClient &client)//, String &rmessage)
+void construct_page(EthernetClient &client)
 {
     print_header(client);
     print_form(client);
-//    print_confirmation(rmessage, client);
     print_confirmation(client);
     end_page(client);
 }
@@ -99,7 +98,7 @@ void print_header(EthernetClient &client)
     client.println("</title><body>");
 }
       
-void print_confirmation(EthernetClient &client)//(String &confirmation_message, EthernetClient &client)
+void print_confirmation(EthernetClient &client)
 {
   client.print("Action performed: <b>");
   client.print(get_request);
