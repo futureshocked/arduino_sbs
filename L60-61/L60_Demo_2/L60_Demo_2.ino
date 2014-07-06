@@ -4,11 +4,11 @@
 //Using a total of 16 LEDs
 
 //Pin connected to latch pin (ST_CP) of 74HC595
-const int latchPin = 8;
+const int latchPin = 9;
 //Pin connected to clock pin (SH_CP) of 74HC595
-const int clockPin = 12;
+const int clockPin = 10;
 ////Pin connected to Data in (DS) of 74HC595
-const int dataPin = 11;
+const int dataPin = 8;
 
 void setup() {
   //set pins to output because they are addressed in the main loop
