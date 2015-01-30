@@ -1,7 +1,7 @@
 /*
 HC-SR04 Ping distance sensor]
 VCC to arduino 5v GND to arduino GND
-Echo to Arduino pin 13 Trig to Arduino pin 12
+Echo to Arduino pin 12 Trig to Arduino pin 13
 Red POS to Arduino pin 11
 Green POS to Arduino pin 10
 Original code improvements to the Ping sketch sourced from Trollmaker.com
