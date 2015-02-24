@@ -21,7 +21,9 @@ void loop() {
   Serial.print(" ");         
   Serial.println(y, DEC);    
   
-  int matrix_y = map(y, 377, 476, 7, 0);
+  int matrix_y = map(y, 377, 476, 7, 0); // Maps values in the range
+                                         // 377 to 476 to the range
+                                         // 7 to 0
   int matrix_x = map(x, 382, 479, 7, 0);
   
   matrix.fillScreen(0);   //Clear the screen
