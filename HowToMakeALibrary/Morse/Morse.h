@@ -78,7 +78,6 @@ static Morse_codes codes[TOTAL_MORSE_CODE_ITEMS] = {
                     {' ',}
                     };
 
-
   class Morse
   {
    private:

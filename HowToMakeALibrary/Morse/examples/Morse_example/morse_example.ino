@@ -2,7 +2,6 @@
 // 10/3/2015 by Peter Dalmaris <peter@txplore.com>
 // Source repository: https://github.com/futureshocked/arduino_sbs/tree/master/HowToMakeALibrary/Morse
 
-
 #include <Morse.h>
 
 //Morse morse = Morse(); //Just use defaults

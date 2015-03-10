@@ -29,6 +29,7 @@ THE SOFTWARE.
 
 #include <Morse.h>
 #include <Arduino.h>
+
 //Create the constructors
 Morse::Morse()
 {
