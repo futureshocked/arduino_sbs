@@ -14,7 +14,7 @@ void loop()
 {
   out = digitalRead(0);       // read analog input pin 0
   
-  Serial.println(out, DEC);    // print the acceleration in the X axis
+  Serial.println(out, DEC);    // print the state of the digital pin 0
 
   delay(100);              // wait 100ms for next reading
 }
