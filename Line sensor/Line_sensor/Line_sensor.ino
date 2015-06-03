@@ -1,4 +1,4 @@
-// Line Sensor Breakout - Analog
+// Line Sensor Breakout - Digital
 
 int out;
 #define tiltPin 12;
