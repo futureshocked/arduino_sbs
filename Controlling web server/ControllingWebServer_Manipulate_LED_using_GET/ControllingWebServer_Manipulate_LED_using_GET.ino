@@ -34,6 +34,13 @@ void loop() {
     while (client.connected()) {
       if (client.available()) {
         char       c = client.read();
+        //A raw GET request looks like this:
+        //GET /path/to/file/index.html?a=1 HTTP/1.0
+        //Notice the space between the "1" in "a=1" and the "H" in "HTTP"?
+        //Once we detect this space, we know that we have completed reading the 
+        //querry string, and the rest of the request is not important,
+        //therefore we can stop reading.
+        //This happens in the following block
         if(reading && c == ' ') 
         { reading = false;  
           return_message = parseGetRequest(get_request);
@@ -47,22 +54,6 @@ void loop() {
         if(reading){ 
             get_request += c;
          }
-
-      
-       if (reading && c=='\n')
-       {
-        break; 
-       }
-       
-        if (c == '\n' && currentLineIsBlank)  {
-         break;
-        }
-        if (c == '\n') {
-          currentLineIsBlank = true;
-        } 
-        else if (c != '\r') {
-          currentLineIsBlank = false;
-        }
       }
     }
     
