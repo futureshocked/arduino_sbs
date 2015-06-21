@@ -9,6 +9,8 @@ like 'client.print' (every statement is a separate set of ethernet transactions)
 POST trasaction is 'assembled' into one string using the Pstring library, which then gets sent in one hit.
 This reduces the IP traffic considerably and when faultfinding with a packet sniffer, its easier
 to see what you are looking for
+
+Updated by Peter Dalmaris, June 21, 2015
 */
 
 #include <SPI.h>
@@ -21,8 +23,7 @@ char content[200];           // larger than required for this example, resize to
 PString str(buffer, sizeof(buffer));
 PString cont(content, sizeof(content));
 
-int ana_A ;    // variables to store analog samples
-int ana_B ;
+int rand_A ;    // variables to store random values
 
 /************ ETHERNET STUFF ************/
 byte mac[] = { 
@@ -37,13 +38,15 @@ byte subnet[] = {255,255,255,0 };
 EthernetClient nimbitsServiceClient;
 //***************************************
 
-unsigned long lastConnectionTime = 0;          // last time you connected to the server, in milliseconds
-const unsigned long postingInterval = 10000;  // 120-sec delay between updates to logging service, 720 per 24hrs to keep within the 1000 quota
-                                               // and leave room for other types of API access 
+unsigned long lastConnectionTime = 0;         // last time you connected to the server, in milliseconds
+const unsigned long postingInterval = 10000;  // 10-sec delay between updates to logging service, 720 per 24hrs to keep within the 1000 quota
+                                              // and leave room for other types of API access. 
+                                              // Should really reduce this to one post every 10-20 minutes 
 
 // these are for your nimbits account
-char mailaddr [] = "you@mail.com";    // your email address for the logging account
-char key [] = "abc";                     // your KEY you created for the account. Not the UUID.
+char mailaddr [] = "your@email.com";    // your email address for the logging account
+char key [] = "your_access_token";                     // your KEY you created for the account. Not the UUID.
+char datapoint [] = "your_datapoint";
 
 
 void setup() {
@@ -55,13 +58,9 @@ void setup() {
     Serial.println(" seconds");
 }
 
-// =========================================================================
-// very simple main loop. Just constantly reads two ADC channels and then if its time to log again, do_weblog() sends in the latest values
-// of A8 and A9
 void loop()
 {
-    ana_A = analogRead(0);    // read some voltage and save it
-    ana_B = analogRead(1);    // read some voltage and save it
+    rand_A = random(10,110);    // create a random decimal
     do_weblog();
 } 
 
@@ -85,33 +84,29 @@ void do_weblog() {
 }
 
 void sendData() {
-    // Create the 'content' string to send. Its assembled from the user details, then the sensor data
-    // 1st part of content is access-details
-    cont.print("email=");
-    cont.print(mailaddr);
-    cont.print("&key=");
-    cont.print(key);
+    // Get the data and store it in the 'cont' string
+    // The data is saved into a JSON structure, using "d" for decimal and "dx" for a description.
+    // These variables are expected by Nimbits.
+    cont.print("json={\"d\"=");                 // d is the decimal value for this data point
+    cont.print(ana_A,DEC);            
+    cont.print(",\"dx\"=\"A random value\"}");  // dx is string that describes the decimal datapoint.
+                                                // You may include other data inside dx.
 
-    // next get the data and store it in the 'cont' string
-    // The data is saved into the data-points 'test123' & 'test456'. These are created in the control console
-    // web page (currently http://www.cloud.nimbits.com )
-    cont.print("&p1=dp1&v1=");        // dp1 is the name of a data point you created
-    cont.print(ana_A,DEC);            // latest analog value. Replace this with whatever you are logging
-    cont.print("&p2=dp2&v2=");        // dp2 is another data point you created
-    cont.print(ana_B,DEC);            // latest analog value. Replace this with whatever you are logging
-                                      // This example only shows two points. It can be extended up to 100
-                                      // but remember to adjust the buffer sizes where the strings get assembled
-
-    // now get the length of the assembled content string. This string is the complete 'content' and includes
-    // email addr, access key, sensor data (two analog vales in this case)
+    // now get the length of the assembled content string that will posted in the body of the request.
     int contlen = (cont.length());
-
+      
     // now try and connect to the web-site
     Serial.println("connecting...");
     if (nimbitsServiceClient.connect("cloud.nimbits.com", 80))     // make the attempt...
     { 
         // the format of the POST section below seems to be fairly critical. 
-        str.print("POST /service/batch HTTP/1.1\r\n");
+        str.print("POST /service/v2/value?email=");       // HTTP/1.1\r\n");
+        str.print(mailaddr);
+        str.print("&id=");
+        str.print(datapoint);
+        str.print("&token=");
+        str.print(key);
+        str.print(" HTTP/1.1\r\n");
         str.print("Host: cloud.nimbits.com\r\n");
         str.print("Connection: close\r\n");
         str.print("Cache-Control: max-age=0\r\n");
@@ -122,9 +117,9 @@ void sendData() {
         str.print("\r\n");  // this empty line is REQUIRED
         str.print(cont);    // the actual content string 'cont' (access details, data points)
         str.print("\r\n");  // and a terminating newline
-// this completes the assembly of the string to send (contained in 'str')
+        // this completes the assembly of the string to send (contained in 'str')
 
-// the total string (post headers and content) is now sent to the ethernet connection in one hit
+        // the total string (post headers and content) is now sent to the ethernet connection in one hit
         nimbitsServiceClient.print(str);  // ethernet send to Nimbits
 
         Serial.println();        // for debug
