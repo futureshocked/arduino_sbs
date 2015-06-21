@@ -48,22 +48,6 @@ char           return_message[30];
         if(reading){ 
             get_request += c;
          }
-
-      
-       if (reading && c=='\n')
-       {
-        break; 
-       }
-       
-        if (c == '\n' && currentLineIsBlank)  {
-         break;
-        }
-        if (c == '\n') {
-          currentLineIsBlank = true;
-        } 
-        else if (c != '\r') {
-          currentLineIsBlank = false;
-        }
       }
     }
     
