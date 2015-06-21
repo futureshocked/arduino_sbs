@@ -100,7 +100,7 @@ void sendData() {
     if (nimbitsServiceClient.connect("cloud.nimbits.com", 80))     // make the attempt...
     { 
         // the format of the POST section below seems to be fairly critical. 
-        str.print("POST /service/v2/value?email=");       // HTTP/1.1\r\n");
+        str.print("POST /service/v2/value?email=");       
         str.print(mailaddr);
         str.print("&id=");
         str.print(datapoint);
