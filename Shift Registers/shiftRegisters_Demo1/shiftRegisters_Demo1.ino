@@ -3,14 +3,22 @@
 //Create a random pattern of blinking LED
 //Using a total of 8 LEDs
 
+//Please double-check your wiring for the latch, clock and data pins.
+//If you constructed your circuit exactly as shown in the schematic in the video,
+//use the following definitions:
 //Pin connected to latch pin (ST_CP) of 74HC595
 // const int latchPin = 9;
-const int latchPin = 8;
 //Pin connected to clock pin (SH_CP) of 74HC595
 // const int clockPin = 10;
-const int clockPin = 12;
 ////Pin connected to Data in (DS) of 74HC595
 // const int dataPin = 8;
+
+//If you did the wiring based on the demo, please use these definitions instead:
+//Pin connected to latch pin (ST_CP) of 74HC595
+const int latchPin = 8;     
+//Pin connected to clock pin (SH_CP) of 74HC595
+const int clockPin = 12;
+//Pin connected to Data in (DS) of 74HC595
 const int dataPin = 11;
 
 void setup() {
