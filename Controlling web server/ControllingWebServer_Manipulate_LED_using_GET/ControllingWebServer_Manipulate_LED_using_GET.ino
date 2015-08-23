@@ -29,8 +29,7 @@ void loop() {
     Serial.println("new client");
     boolean sentContent    = false;
     get_request           = "";
-    // an http request ends with a blank line
-    boolean        currentLineIsBlank = true;
+    
     while (client.connected()) {
       if (client.available()) {
         char       c = client.read();
