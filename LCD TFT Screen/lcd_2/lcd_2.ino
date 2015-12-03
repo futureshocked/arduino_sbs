@@ -18,7 +18,7 @@ void setup()
   }
   
   pinMode(10, OUTPUT);
-  analogWrite(10, 1023); //PWM control blacklight
+  analogWrite(10, 255); //PWM control blacklight
   /* Initialize the LCD, set the contrast, clear the screen */
   lcd.init(PHILLIPS);
   lcd.contrast(40);
