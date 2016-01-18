@@ -1,17 +1,17 @@
 /*************************************************** 
-  This is an example sketch for our optical Fingerprint sensor
+  This sketch implements a simple door security system.
 
-  Designed specifically to work with the Adafruit BMP085 Breakout 
-  ----> http://www.adafruit.com/products/751
+  It uses a fingerprint sensor for authentication.
 
-  These displays use TTL Serial to communicate, 2 pins are required to 
-  interface
-  Adafruit invests time and resources providing this open source code, 
-  please support Adafruit and open-source hardware by purchasing 
-  products from Adafruit!
+  If there is a fingerprint match, it turns off the coil
+  of a fail-safe electric door lock. This allows a person
+  to enter or exit a room.
 
-  Written by Limor Fried/Ladyada for Adafruit Industries.  
-  BSD license, all text above must be included in any redistribution
+  Five seconds later, the door lock is energised and the
+  door is locked again.
+
+  Look at the Arduino SbS course at http://txplore.tv/courses/arduino-sbs
+  for more information.
  ****************************************************/
 
 
