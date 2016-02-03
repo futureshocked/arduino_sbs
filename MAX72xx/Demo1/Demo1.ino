@@ -180,4 +180,15 @@ void loop() {
 
     delay(100);
   }
+  
+  /********************/
+  //Brightness
+  for (int i=0; i<16; i++)
+  {
+  matrix.setIntensity(i);
+  matrix.fillScreen(i);
+  matrix.write(); //send bitmap to display
+  delay(200);
+  }
+  /********************/
 }
