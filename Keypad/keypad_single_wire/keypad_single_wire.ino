@@ -1,4 +1,4 @@
-char* keypressed = 0;
+char* keypressed;
 int keyboardPin = 0;    // Analog input pin that the keypad is attached to
 int keyboardValue = 0;   // value read from the keyboard
 
