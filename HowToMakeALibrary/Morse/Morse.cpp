@@ -100,9 +100,9 @@ void Morse::flash_led(char code)
         delay(_dot_length_ms);
     else if (code == ' ') 
         delay(_words_space);
-    else if (code == '-')
+    else
         delay(_dash_legth);
        
     digitalWrite( _led_pin, LOW);
-    delay(_part_gap);
+    delay(_letter_space);
 }

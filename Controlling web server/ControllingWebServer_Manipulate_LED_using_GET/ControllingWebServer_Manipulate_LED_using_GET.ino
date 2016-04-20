@@ -69,7 +69,7 @@ void loop() {
   }
 }
 
-void construct_page(EthernetClient &client, String &rmessage)
+void construct_page(EthernetClient client, String rmessage)
 {
     print_header(client);
     print_form(client);
