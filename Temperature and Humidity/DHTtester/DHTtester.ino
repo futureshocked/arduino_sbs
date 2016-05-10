@@ -29,6 +29,14 @@ void loop() {
   if (isnan(t) || isnan(h)) {
     Serial.println("Failed to read from DHT");
   } else {
+    // Uncomment these lines if you prefer to use the Fahrenheit scale 
+    // instead of Celsius. Remember to change line 44 so that the 
+    // symbol is "F" instead of "C"
+    // float fahrenheitTemp = t * 9.0/5.0+32.0;
+    // Serial.print("Temperature: ");
+    // Serial.print(fahrenheitTemp);
+    // Serial.println(" F");
+    
     Serial.print("Humidity: ");
     Serial.print(h);
     Serial.print(" %\t");
