@@ -6,7 +6,7 @@ const int PinCLK=2;                   // Used for generating interrupts using CL
 const int PinDT=3;                    // Used for reading DT signal
 const int PinSW=8;                    // Used for the push button switch
 
-volatile long     virtualPosition  =0;  // without STATIC it does not count correctly!!!
+volatile long     virtualPosition  =0;  // must be volatile to work with the isr
 
 void isr0 ()  {
   detachInterrupt(0);
