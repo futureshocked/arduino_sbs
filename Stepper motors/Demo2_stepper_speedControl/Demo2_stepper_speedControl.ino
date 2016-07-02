@@ -11,6 +11,8 @@
  you may notice the motor is less responsive to changes in the sensor value at
  low speeds.
  
+ You will need a 10Kohm potentiometer, a stepper motor and an L298 motor driver module.
+ 
  Created 30 Nov. 2009
  Modified 28 Oct 2010
  by Tom Igoe
