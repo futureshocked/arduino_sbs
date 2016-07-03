@@ -1,3 +1,14 @@
+/*
+This sketch is used to demonstrated the EasyDriver motor controller board with 
+a NEMA17 stepper motor.
+
+For more informaiton on the EasyDriver, please go to http://www.schmalzhaus.com/EasyDriver/
+
+More examples to help you learn the details of the EasyDriver are here: http://www.schmalzhaus.com/EasyDriver/Examples/EasyDriverExamples.html
+
+*/
+
+
 void setup() {                
   pinMode(8, OUTPUT);     
   pinMode(9, OUTPUT);
